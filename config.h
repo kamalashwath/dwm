@@ -1,8 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
+/* constants */
+#define TERM "st"
+#define TERMCLASS "St"
+#define EDITOR "nvim"
+#define BROWSER "librewolf"
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:pixelsize=12" };
@@ -20,8 +27,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance    title       tags mask     isfloating   monitor */
-	{  NULL,     NULL,       NULL,       0,            0,           -1 },
+	/* class     instance    title            tags mask     isfloating  isterminal  noswallow  monitor */
+	{  "St",     NULL,       NULL,            0,            0,          1,          0,         -1 },
+	{  NULL,     NULL,       "Event Tester",  0,            0,          0,          1,         -1 },
 };
 
 /* layout(s) */
@@ -51,7 +59,7 @@ static const Layout layouts[] = {
 static Key keys[] = {
 	/* modifier          key        function        argument */
 	{ MODKEY,            XK_p,      spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
-	{ MODKEY,            XK_Return, spawn,          {.v = (const char*[]){ "st", NULL } } },
+	{ MODKEY,            XK_Return, spawn,          {.v = (const char*[]){ TERM, NULL } } },
 	{ MODKEY,            XK_b,      togglebar,      {0} },
 	{ MODKEY,            XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,            XK_k,      focusstack,     {.i = -1 } },
@@ -83,6 +91,8 @@ static Key keys[] = {
 	TAGKEYS(             XK_7,                      6)
 	TAGKEYS(             XK_8,                      7)
 	TAGKEYS(             XK_9,                      8)
+	{ MODKEY|ShiftMask,  XK_l,      spawn,          {.v = (const char*[]){ "slock", NULL } } },
+	{ MODKEY|ShiftMask,  XK_r,      quit,           {1} },
 	{ MODKEY|ShiftMask,  XK_q,      quit,           {0} },
 };
 
