@@ -27,7 +27,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class     instance    title    tags mask     isfloating  monitor */
-	{  NULL,     NULL,       NULL,    0,            0,          -1 },
+	// {  NULL,     NULL,       NULL,    0,            0,          -1 },
+	{ NULL,       NULL,   "scratchpad",   0,            1,           -1,       's' },
 };
 
 /* window swallowing */
@@ -59,10 +60,13 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL}; 
+
 static Key keys[] = {
 	/* modifier          key        function        argument */
 	{ MODKEY,            XK_p,      spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY,            XK_Return, spawn,          {.v = (const char*[]){ TERM, NULL } } },
+	{ MODKEY,            XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,            XK_b,      togglebar,      {0} },
 	{ MODKEY,            XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,            XK_k,      focusstack,     {.i = -1 } },
