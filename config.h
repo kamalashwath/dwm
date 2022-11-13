@@ -7,15 +7,15 @@
 #define BROWSER "librewolf"
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:pixelsize=16" };
+static const char *fonts[]          = { "monospace:pixelsize=18" };
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { "#bbbbbb", "#222222", "#444444" },
-	[SchemeSel]  = { "#eeeeee", "#005577", "#bb0000" },
+	[SchemeSel]  = { "#eeeeee", "#005577", "#005577" },
 };
 
 /* tagging */
@@ -46,9 +46,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
+	{ "[M]",      monocle },
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
 };
 
 /* key definitions */
@@ -84,10 +84,10 @@ static Key keys[] = {
 	{ MODKEY,            XK_space,  zoom,           {0} },
 	{ MODKEY,            XK_Tab,    view,           {0} },
 	{ MODKEY,            XK_q,      killclient,     {0} },
-	{ MODKEY,            XK_f,      togglefullscr,  {0} },
-	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,            XK_y,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,            XK_g,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,  XK_f,      togglefullscr,  {0} },
+	{ MODKEY,            XK_m,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,            XK_f,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,            XK_v,      setlayout,      {0} },
 	{ MODKEY|ShiftMask,  XK_space,  togglefloating, {0} },
     { MODKEY,            XK_u,      swalstopsel,    {0} },
